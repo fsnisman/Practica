@@ -1,49 +1,72 @@
 #include <iostream>
 #include <cstdlib>
-
 using namespace std;
-
+//======================================================================================================================
+enum Suit{
+    Card_Peaks = "peaks",
+    Card_Hearts = "hearts",
+    Card_Diamonds = "diamonds",
+    Card_Clubs = "clubs"
+};
+enum Value{
+    Card_Value2 = 2,
+    Card_Value3 = 3,
+    Card_Value4 = 4,
+    Card_Value5 = 5,
+    Card_Value6 = 6,
+    Card_Value7 = 7,
+    Card_Value8 = 8,
+    Card_Value9 = 9,
+    Card_Value10 = 10,
+    Card_Jack = 2,
+    Card_Lady = 3,
+    Card_King = 4,
+    Card_Ace1 = 1,
+    Card_Ace11 = 11
+};
+//======================================================================================================================
 class Cards{
 protected:
+    Suit suit;
+    Value value;
+    bool flip_card;
     int source = 0;
-};
-class Cards_number: public Cards{     //V etom classe nygen bydet random na chislo ot 2 do 10
-private:
-    int number_card = rand()% 10 +2;
 public:
-    void set_number_source() {
-        source += number_card;
+    bool Flip(){
+        if (flip_card == 0){
+            return flip_card = 1;
+        }
+        else (flip_card == 1){
+            return  flip_card = 0;
+        }
     }
-
-};
-class Cards_image: public Cards{
-private:
-    int image_card = 10;
-public:
-    void set_image_source(){
-        source += image_card;
+    int getValue(){
+        return value;
     }
 };
-class Cards_Ace: public Cards{
-private:
-    int ace_card = 11;
+class Hand{
+protected:
 public:
-    void set_ace_source(){
-        source += ace_card;
-    }
 };
-
-class Person: public Cards{
+class Deck: public Hand{
 private:
-    int source_dealer;
-    int source_player;
 public:
-    void set_source_dealer(){
-        source_dealer = source;
-    }
-    void set_source_player(){
-        source_player = source;
-    }
+};
+class GenericPlayer: public Hand{
+protected:
+public:
+};
+class Player: public GenericPlayer{
+private:
+public:
+};
+class House: public GenericPlayer{
+private:
+public:
+};
+class Game{
+private:
+public:
 };
 
 int main() {
