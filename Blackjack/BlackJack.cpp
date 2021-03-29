@@ -3,12 +3,12 @@
 using namespace std;
 //======================================================================================================================
 enum Suit{
-    Card_Peaks = "peaks",
-    Card_Hearts = "hearts",
-    Card_Diamonds = "diamonds",
-    Card_Clubs = "clubs"
+    Card_Peaks = 1,
+    Card_Hearts = 2,
+    Card_Diamonds = 3,
+    Card_Clubs = 4
 };
-enum Value{
+enum Rank{
     Card_Value2 = 2,
     Card_Value3 = 3,
     Card_Value4 = 4,
@@ -21,52 +21,112 @@ enum Value{
     Card_Jack = 2,
     Card_Lady = 3,
     Card_King = 4,
-    Card_Ace1 = 1,
-    Card_Ace11 = 11
+    Card_Ace = 1 | 11,
 };
 //======================================================================================================================
 class Cards{
 protected:
-    Suit suit;
-    Value value;
-    bool flip_card;
+    Rank m_Rank;
+    Suit m_Suit;
+    bool IsFaceUp;
     int source = 0;
 public:
-    bool Flip(){
-        if (flip_card == 0){
-            return flip_card = 1;
+    bool m_IsFaceUp() const{            // 0 - рубашкоой, 1 - лицо
+        if (IsFaceUp == 0){
+            return IsFaceUp = 0;
         }
-        else (flip_card == 1){
-            return  flip_card = 0;
+        else (IsFaceUp == 1){
+            return  IsFaceUp = 1;
         }
     }
-    int getValue(){
+    int getValue() const{
         return value;
+    }
+    void Flip(){
+        if (IsFaceUp == 0){
+            return IsFaceUp = 1;
+        }
+        if (IsFaceUp == 1){
+            return IsFaceUp = 0;
+        }
     }
 };
 class Hand{
-protected:
+private:
+    vector<Card*> m_Cards;
 public:
+    void Add(Card* pCard){
+        m_Cards.push_back(pCard);
+
+    };
+    void Clear(){
+        m_Cards.clear();
+    };
+    int getTotal(){
+        m_Rank += source;
+        return source;
+    }
 };
 class Deck: public Hand{
-private:
 public:
+    void Populate(){
+
+    };
+    void Shuffle(){
+
+    };
+    void Deal (Hand& aHand){
+
+    };
+    void AddItionalCards(GenericPlayer&aGenerIcPlayer){
+
+    };
 };
 class GenericPlayer: public Hand{
-protected:
+private:
+    string m_Name;
 public:
+    virtual bool IsHitting() const = 0;
+    bool IsBoosted() const{
+
+    };
+    void Bust() const{
+
+    };
 };
 class Player: public GenericPlayer{
-private:
 public:
+    virtual bool IsHitting() const{
+
+    };
+    void Win() const{
+
+    };
+    coid Lose() const{
+
+    };
+    void Push() const{
+
+    };
 };
 class House: public GenericPlayer{
-private:
 public:
+    virtual bool isHitting(){
+
+    }
+    void FlipFirstCard(){
+
+    };
 };
 class Game{
 private:
+    Deck m_Deck;
+    House m_House;
+    vector<Player> m_Players;
 public:
+    void Play(){
+
+    };
 };
 
 int main() {
