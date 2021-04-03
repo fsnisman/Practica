@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 using namespace std;
-//======================================================================================================================
+
 class Cards{
 private:
     Rank m_Rank;
@@ -15,7 +15,7 @@ public:
         ACE = 1, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN,
         JACK, QUEEN, KING
     };
-    Card(rank r, suit s, bool ifu): m_Rank(r), m_Suit(s), m_IsFaceUp(ifu){}
+    Cards(rank r, suit s, bool ifu): m_Rank(r), m_Suit(s), m_IsFaceUp(ifu){}
     int getValue() const{
         //если карта перевернута лицом вниз, ее значение равно 0
         int value = 0;
@@ -32,10 +32,22 @@ public:
     void Flip(){
         m_IsFaceUp = !(m_IsFaceUp)
     }
+    friend ostream& operator<< (ostream& os, const Cards& aCard);
 };
+ostream& operator<< (ostream& os, const Cards& aCard){
+    const string RANKS[] = {"0", "A", "2", "3", "4", "5", "6", "7", "8", "9","10", "J", "Q", "K" };
+    if (aCard.m_IsFaceUp){
+        os << RANKS[aCard.m_Rank] << SUITS [aCard.m_Suit];
+    }
+    else{
+        os << "XX";
+    }
+    return os;
+}
+
 class Hand{
 protected:
-    vector<Card*> m_Cards;
+    vector<Cards*> m_Cards;
 public:
     Hand(){
         m_Cards.reserve(7)
@@ -45,13 +57,13 @@ public:
         Clear()
     };
     //добавляет карту в руку
-    void Add(Card* pCard){
+    void Add(Cards* pCard){
         m_Cards.push_back(pCard)
     };
     //очишает руку от карт
     void Clear(){
         //проходит по векртору, освобождая память
-        vector<Card*>::iterator iter = m_Cards.begin();
+        vector<Cards*>::iterator iter = m_Cards.begin();
         for (iter = m_Cards.begin(); iter != m_Cards.end(); ++iter)
         {
             delete *iter;
@@ -90,6 +102,7 @@ public:
         return total;
     }                                   //получает сумму очков карт в руке. присваеваем значение тузу 1 или 11 по ситуаци
 };
+
 class Deck: public Hand{
 public:
     void Populate(){
@@ -105,54 +118,102 @@ public:
 
     };
 };
+
+//абстрактный класс
 class GenericPlayer: public Hand{
-private:
-    string Name;
+    friend ostream& operator<< (ostream& os, const GenericPlayer& aGenericPlayer);
 public:
-    virtual bool IsHitting() const{
-        if (total < 21){
-            Add(Cards* total);
-            return total;
-        }
-    };
+    GenericPlayer(const string& Name = ""): m_Name(Name){};
+    virtual ~GenericPlayer();
+
+    // показывает, хочет ли игрок продолжать брать карты
+    // Для класса GenericPlayer функция не имеет своей реализации,
+    // т.к. для игрока и дилера это будут разные функции
+    virtual bool IsHitting() const = 0;
+
+    // возвращает значение, если у игрока перебор -
+    // сумму очков большую 21
+    // данная функция не виртуальная, т.к. имеет одинаковую реализацию
+    // для игрока и дилера
     bool IsBoosted() const{
-        if (total > 21){
-            return false;
-        }
-        else {
-            return bool;
-        }
+        return (GetTotal() > 21);
     };
+
+    // объявляет, что игрок имеет перебор
+    // функция одинакова как для игрока, так и для дилера
     void Bust() const{
-        if (IsBoosted() == false) {
-            cout << Name << " " << "Enumeration of cards" << endl;
-        }
+        cout << m_Name << " " << "Enumeration of cards\n";
     };
+protected:
+    string m_Name;
 };
+ostream& operator<< (ostream& os, const GenericPlayer& aGenericPlayer){
+    os << aGenericPlayer.m_Name << ":\t";
+    vector<Card*>::const_iterator pCard;
+    if(!aGenericPlayer.m_Cards.empti()){
+        for (pCard = aGenericPlayer.m_Cards.begin; pCard != aGenericPlayer.m_Cards.end(); ++pCard){
+            os << *(*pCard) << "\t";
+        }
+        if (aGenericPlayer.GetTotal() != 0){
+            cout << "(" << aGenericPlayer.GetTotal() << ")";
+        }
+    }
+    else{
+        os << "<empty>";
+    }
+    return os;
+}
+
 class Player: public GenericPlayer{
 public:
+    Player(const string& Name = "");
+    virtual  ~Player();
+
+    // показывает, хочет ли игрок продолжать брать карты
     virtual bool IsHitting() const{
-
+        cout << m_Name << ", do you want a hit? (Y/N)";
+        char response;
+        cin >> response;
+        return (response == 'y' || response == 'Y');
     };
+
+    // объявляет, что игрок победил
     void Win() const{
-
+        cout << m_Name << " wins.\n";
     };
-    coid Lose() const{
 
+    // объявляет, что игрок проиграл
+    void Lose() const{
+        cout << m_Name << " loses.\n";
     };
+
+    // объявляет ничью
     void Push() const{
-
+        cout << m_Name << " pushes.\n";
     };
 };
+
 class House: public GenericPlayer{
 public:
+    House(const string& name = "House");
+    virtual ~House();
+
+    // показывает, хочет ли дилер продолжать брать карты
     virtual bool isHitting(){
+        return (GetTotal() <= 16);
+    };
 
-    }
+    // переворачивает первую карту
     void FlipFirstCard(){
-
+        if (!(m_Cards.empty())){
+            m_Cards[0]->Flip();
+        };
+        else{
+            cout << "No card to flip!\n"
+        }
     };
 };
+
 class Game{
 private:
     Deck m_Deck;
