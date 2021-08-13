@@ -1,26 +1,6 @@
 ﻿  PersonSort.cpp
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29910\include\xmemory(696,82): error C2661: Person::Person: нет перегруженной функции, принимающей 3 аргументов
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29910\include\vector(689): message : выполняется компиляция ссылки на экземпляр шаблон функции "void std::_Default_allocator_traits<_Alloc>::construct<_Ty,std::string&,std::string&,std::string&>(_Alloc &,_Objty *const ,std::string &,std::string &,std::string &)"
-          with
-          [
-              _Alloc=std::allocator<Person>,
-              _Ty=Person,
-              _Objty=Person
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29910\include\vector(694): message : выполняется компиляция ссылки на экземпляр шаблон функции "void std::_Default_allocator_traits<_Alloc>::construct<_Ty,std::string&,std::string&,std::string&>(_Alloc &,_Objty *const ,std::string &,std::string &,std::string &)"
-          with
-          [
-              _Alloc=std::allocator<Person>,
-              _Ty=Person,
-              _Objty=Person
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29910\include\vector(707): message : выполняется компиляция ссылки на экземпляр шаблон функции "_Ty &std::vector<_Ty,std::allocator<_Ty>>::_Emplace_back_with_unused_capacity<std::string&,std::string&,std::string&>(std::string &,std::string &,std::string &)"
-          with
-          [
-              _Ty=Person
-          ]
-F:\Practica C++\Practica\Hard Moment\1\PersonSort\PersonSort\PersonSort.cpp(126): message : выполняется компиляция ссылки на экземпляр шаблон функции "_Ty &std::vector<_Ty,std::allocator<_Ty>>::emplace_back<std::string&,std::string&,std::string&>(std::string &,std::string &,std::string &)"
-          with
-          [
-              _Ty=Person
-          ]
+F:\Practica C++\Practica\Hard Moment\1\PersonSort\PersonSort\PersonSort.cpp(173,9): warning C4834: отмена возвращаемого значения функции с атрибутом "nodiscard"
+F:\Practica C++\Practica\Hard Moment\1\PersonSort\PersonSort\PersonSort.cpp(170): warning C4715: PhoneBook::GetPhoneNumber: значение возвращается не при всех путях выполнения
+F:\Practica C++\Practica\Hard Moment\1\PersonSort\PersonSort\PersonSort.cpp(173): warning C4715: <lambda_21120628c4ca29e4aec5ff025cc0029b>::operator()<std::pair<Person,PhoneNumber> >: значение возвращается не при всех путях выполнения
+F:\Practica C++\Practica\Hard Moment\1\PersonSort\PersonSort\PersonSort.cpp(159): warning C4715: <lambda_bdffaf9d94609d11c982499140260fb5>::operator()<std::pair<Person,PhoneNumber> >: значение возвращается не при всех путях выполнения
+  PersonSort.vcxproj -> F:\Practica C++\Practica\Hard Moment\1\PersonSort\Debug\PersonSort.exe
