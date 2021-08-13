@@ -80,9 +80,6 @@ bool operator<(const PhoneNumber& p1, const PhoneNumber& p2) {
 auto operator_slogenie(PhoneNumber& p1, const PhoneNumber& p2) {
     return tie(p1.code_country, p1.code_city, p1.phone_number, p1.phone_number_additional) = tie(p2.code_country, p2.code_city, p2.phone_number, p2.phone_number_additional);
 };
-auto tuple_return(string not_found, const PhoneNumber phonenumber, string found_1_more_then) {
-    return tuple(not_found, phonenumber, found_1_more_then);
-};
 
 class PhoneBook {
 private:
