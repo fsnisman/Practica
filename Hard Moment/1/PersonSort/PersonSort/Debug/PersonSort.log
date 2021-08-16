@@ -1,2 +1,6 @@
 ﻿  PersonSort.cpp
-  PersonSort.vcxproj -> F:\Practica C++\Practica\Hard Moment\Practical1\PersonSort\Debug\PersonSort.exe
+F:\Practica C++\Practica\Hard Moment\1\PersonSort\PersonSort\PersonSort.cpp(171,9): warning C4834: отмена возвращаемого значения функции с атрибутом "nodiscard"
+F:\Practica C++\Practica\Hard Moment\1\PersonSort\PersonSort\PersonSort.cpp(168): warning C4715: PhoneBook::GetPhoneNumber: значение возвращается не при всех путях выполнения
+F:\Practica C++\Practica\Hard Moment\1\PersonSort\PersonSort\PersonSort.cpp(171): warning C4715: <lambda_21120628c4ca29e4aec5ff025cc0029b>::operator()<std::pair<Person,PhoneNumber> >: значение возвращается не при всех путях выполнения
+F:\Practica C++\Practica\Hard Moment\1\PersonSort\PersonSort\PersonSort.cpp(157): warning C4715: <lambda_bdffaf9d94609d11c982499140260fb5>::operator()<std::pair<Person,PhoneNumber> >: значение возвращается не при всех путях выполнения
+  PersonSort.vcxproj -> F:\Practica C++\Practica\Hard Moment\1\PersonSort\Debug\PersonSort.exe
